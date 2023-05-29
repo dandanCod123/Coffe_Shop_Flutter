@@ -1,10 +1,44 @@
 import 'package:coffe_shop/util/coffe_title.dart';
+import 'package:coffe_shop/util/coffee_type.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePageCoffe extends StatelessWidget {
-  const HomePageCoffe({super.key});
+class Coffe_Page extends StatefulWidget {
+  const Coffe_Page({super.key});
 
+  @override
+  State<Coffe_Page> createState() => _Coffe_PageState();
+}
+
+// LISTA DE TIPOS, PRA ATIVAR OS BOTOES
+final List coffeType = [
+  [
+    'Cappuccino',
+    true,
+  ],
+  [
+    'Latte',
+    true,
+  ],
+  [
+    'Black',
+    true,
+  ],
+  [
+    'Tea',
+    true,
+  ]
+];
+// GERENCIAR ESTADOSF
+void coffeTypeSelected(int index) {
+  setState(() {
+    coffeType[index][1] = true;
+  });
+}
+
+void setState(Null Function() param0) {}
+
+class _Coffe_PageState extends State<Coffe_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,14 +91,29 @@ class HomePageCoffe extends StatelessWidget {
           SizedBox(
             height: 25,
           ),
+
+          /////
+          Container(
+              height: 50,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: coffeType.length,
+                  itemBuilder: (context, index) {
+                    return CoffeType(
+                        coffeeType: coffeType[index][0],
+                        isSelected: coffeType[index][1],
+                        onTap: () {
+                          coffeTypeSelected(index);
+                        });
+                  })),
+
           Expanded(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                CoffeeTtile(),
-              ],
-            ),
-          )
+              child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              CoffeeTtile(),
+            ],
+          ))
         ],
       ),
     );
