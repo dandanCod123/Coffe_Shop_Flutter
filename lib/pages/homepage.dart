@@ -32,6 +32,9 @@ final List coffeType = [
 // GERENCIAR ESTADOSF
 void coffeTypeSelected(int index) {
   setState(() {
+    for (int i = 0; i < coffeType.length; i++) {
+      coffeType[i][1] = false;
+    }
     coffeType[index][1] = true;
   });
 }
@@ -111,7 +114,21 @@ class _Coffe_PageState extends State<Coffe_Page> {
               child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
-              CoffeeTtile(),
+              CoffeeTtile(
+                coffeImagePath: "assets/images/Latte.jpg",
+                coffeName: 'Latte',
+                coffePrice: '4.20',
+              ),
+              CoffeeTtile(
+                coffeImagePath: "assets/images/cap.jpeg",
+                coffeName: 'Cappuccino',
+                coffePrice: '8.20',
+              ),
+              CoffeeTtile(
+                coffeImagePath: "assets/images/tea.jpg",
+                coffeName: 'Tea',
+                coffePrice: '6.20',
+              ),
             ],
           ))
         ],
